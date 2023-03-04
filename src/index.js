@@ -1,14 +1,62 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Route,
+  Link,
+} from "react-router-dom";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+// import the components
+import Home from './pages/Home';
+import RechartsBI from './pages/RechartsBI';
+import VictoryBI from './pages/VictoryBI';
+import BizchartsBI from './pages/BizchartsBI';
+import ErrorPage from "./pages/ErrorPage";
+import Navbar from "./navigation/Navbar";
+
+import './index.css';
+import './App.css';
+
+import reportWebVitals from './reportWebVitals';
+const AppLayout = () => {
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+    </>
+  );
+};
+
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "recharts",
+        element: <RechartsBI />,
+      },
+      {
+        path: "victory",
+        element: <VictoryBI />,
+      },
+      {
+        path: "bizchart",
+        element: <BizchartsBI />,
+      },
+    ],
+  },
+]);
+
+
+createRoot(document.getElementById("root")).render(
+  <RouterProvider router={router} />
 );
 
 // If you want to start measuring performance in your app, pass a function
