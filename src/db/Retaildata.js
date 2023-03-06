@@ -1,10 +1,14 @@
-import { Storage } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 
-async function fetchDataFromS3() {
-  try {
-    const data = await Storage.get('path/to/my-retail-datasets.csv');
-    console.log(data); // handle the data
-  } catch (error) {
-    console.error('Error fetching data: ', error);
+Amplify.configure({
+  Auth: {
+    // configure authentication
+  },
+  Storage: {
+    // configure storage
+    AWSS3: {
+      bucketName: 'my-retail-datasets',
+      region: 'eu-west-2',
+    }
   }
-}
+});

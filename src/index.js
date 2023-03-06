@@ -1,34 +1,39 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
+import React from 'react';
+import { createRoot } from 'react-dom/client';
 import {
   createBrowserRouter,
   RouterProvider,
   Outlet,
   Route,
   Link,
-} from "react-router-dom";
+} from 'react-router-dom';
 
 // import the components
 import Home from './pages/Home';
 import RechartsBI from './pages/RechartsBI';
 import VictoryBI from './pages/VictoryBI';
 import BizchartsBI from './pages/BizchartsBI';
-import ErrorPage from "./pages/ErrorPage";
-import Navbar from "./navigation/Navbar";
+import ErrorPage from './pages/ErrorPage';
+import Navbar from './navigation/Navbar';
+import LoadDataContextProvider from './assets/LoadDataContextProvider';
 
 import './index.css';
 import './App.css';
 
 import reportWebVitals from './reportWebVitals';
+
 const AppLayout = () => {
   return (
     <>
+    <LoadDataContextProvider>
       <Navbar />
       <Outlet />
+    </LoadDataContextProvider>      
     </>
   );
 };
 
+//create router to navigation
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
